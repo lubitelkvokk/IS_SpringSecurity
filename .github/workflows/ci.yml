@@ -5,5 +5,7 @@ jobs:
   Static_analyzer:
     runs-on: ubuntu-latest
     steps:
+      - name: Check secrets
+        run: echo "${{ secrets.NVD_API_KEY }}"
       - name: OWASP Dependency Check
         run: mvn verify -Dnvd.api.key="${{ secrets.NVD_API_KEY }}"
