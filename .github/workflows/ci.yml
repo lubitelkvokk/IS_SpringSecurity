@@ -11,7 +11,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: OWASP Dependency Check
-        working-directory: IS_SpringSecurity
         run: mvn verify -Dnvd.api.key="$NVD_API_KEY"
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
