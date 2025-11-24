@@ -7,19 +7,23 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.minusd.security.domain.dto.UserDTO;
 import ru.minusd.security.service.UserService;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/example")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @Tag(name = "Примеры", description = "Примеры запросов с разными правами доступа")
 public class ExampleController {
     private final UserService service;
+    private final UserService userService;
 
-    @GetMapping
+    @GetMapping("/data")
     @Operation(summary = "Доступен только авторизованным пользователям")
-    public String example() {
-        return "Hello, world!";
+    public List<UserDTO> data() {
+        return userService.getAllUsers();
     }
 
     @GetMapping("/admin")

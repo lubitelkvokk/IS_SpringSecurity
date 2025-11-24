@@ -1,0 +1,9 @@
+name: Security Check
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  Static_analyzer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: OWASP Dependency Check
+        run: mvn verify -Dnvd.api.key="${{ secrets.NVD_API_KEY }}"

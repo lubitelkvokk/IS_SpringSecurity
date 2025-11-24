@@ -5,14 +5,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import ru.minusd.security.domain.dto.UserDTO;
 import ru.minusd.security.domain.model.Role;
 import ru.minusd.security.domain.model.User;
 import ru.minusd.security.repository.UserRepository;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository repository;
+    private final UserRepository userRepository;
 
     /**
      * Сохранение пользователя
@@ -73,6 +77,13 @@ public class UserService {
         // Получение имени пользователя из контекста Spring Security
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
         return getByUsername(username);
+    }
+
+    public List<UserDTO> getAllUsers() {
+        return userRepository.findAll().stream().map(userEntity ->
+        new UserDTO(userEntity.getUsername(),
+                userEntity.getEmail(),
+                userEntity.getRole())).toList();
     }
 
 
