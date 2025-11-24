@@ -4,8 +4,9 @@ on: [push]
 jobs:
   Static_analyzer:
     runs-on: ubuntu-latest
+    steps:
       - name: OWASP Dependency Check
         run: mvn verify -Dnvd.api.key="$NVD_API_KEY"
-       env:
-         NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
-       working-directory: ./IS_SpringSecurity
+        env:
+           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+        working-directory: "./IS_SpringSecurity"
