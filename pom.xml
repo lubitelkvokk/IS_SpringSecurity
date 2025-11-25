@@ -222,7 +222,7 @@
                 <artifactId>dependency-check-maven</artifactId>
                 <version>12.1.9</version>
                 <configuration>
-                    <suppressionFile>dependency-check-suppressions.xml</suppressionFile>
+                    <suppressionFile>dependency-check-suppression.xml</suppressionFile>
                     <formats>
                         <format>HTML</format>
                         <format>JSON</format>
