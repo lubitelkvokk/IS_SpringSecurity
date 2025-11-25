@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <!-- CVE-2025-7962: SMTP injection in angus-mail 2.0.3 -->
+    <!-- Rationale: Version 2.0.3 includes mitigations for SMTP injection. NVD database lag. -->
+    <!-- Accepted risk: CVSS 6.0 (MEDIUM), below 8.0 threshold -->
+    <suppression>
+        <cve>CVE-2025-7962</cve>
+        <packageUrl>pkg:maven/org.eclipse.angus/angus-activation@2.0.3</packageUrl>
+    </suppression>
+</suppressions>
