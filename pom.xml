@@ -229,19 +229,17 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>12.1.0</version>
+                <version>12.1.6</version>
                 <configuration>
                     <formats>
                         <format>HTML</format>
                         <format>JSON</format>
                         <format>XML</format>
                     </formats>
-                    <!-- Set to 8 to allow CVSS 6.0 vulnerabilities (CVE-2025-7962 is fixed in 2.0.3
-                    but NVD may lag) -->
                     <failBuildOnCVSS>8</failBuildOnCVSS>
-                    <skipTestScope>true</skipTestScope>
-                    <!-- Disable OSS Index analyzer due to auth/rate-limit issues -->
-                    <ossIndexServerId>ossindex</ossIndexServerId>
+                    <ossIndexUsername>${env.OSSINDEX_USERNAME}</ossIndexUsername>
+                    <ossIndexPassword>${env.OSSINDEX_TOKEN}</ossIndexPassword>
+                    <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
                 </configuration>
                 <executions>
                     <execution>

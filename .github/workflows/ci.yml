@@ -50,12 +50,7 @@ jobs:
 
       - name: Run OWASP Dependency-Check (SCA)
         run: |
-          mvn -ntp org.owasp:dependency-check-maven:12.1.0:check \
-                      -Dformat=ALL \
-                      -DfailBuildOnCVSS=7 \
-                      -Dnvd.apiKey="${{ env.NVD_API_KEY }}" \
-                      -DossIndex.username="${{ env.OSSINDEX_USERNAME }}" \
-                      -DossIndex.password="${{ env.OSSINDEX_TOKEN }}"
+          mvn -ntp dependency-check:check
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
           OSSINDEX_USERNAME: ${{ secrets.OSSINDEX_USERNAME }}
