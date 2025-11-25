@@ -81,9 +81,13 @@ public class UserService {
 
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream().map(userEntity ->
-        new UserDTO(userEntity.getUsername(),
-                userEntity.getEmail(),
-                userEntity.getRole())).toList();
+                UserDTO.builder()
+                        .id(userEntity.getId())
+                        .username(userEntity.getUsername())
+                        .email(userEntity.getEmail())
+                        .role(userEntity.getRole())
+                        .build()
+        ).toList();
     }
 
 
