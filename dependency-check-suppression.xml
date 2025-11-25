@@ -2,10 +2,12 @@
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
     <suppress>
         <notes>
-            Уязвимость CVE-2018-14335 исправлена в стабильной ветке H2, включая 2.2.224.
-            Это ложное срабатывание, возникшее из-за неверной классификации NVD.
+            Уязвимость CVE-2018-14335 в H2 (2.2.224) считается ложным срабатыванием
+            из-за неверной классификации NVD. Была исправлена в стабильных ветках.
         </notes>
+
         <cve>CVE-2018-14335</cve>
-        <packageUrl regex="true">^pkg:maven/com\.h2database/h2@.*$</packageUrl>
+
+        <packageUrl regex="true">^pkg:maven/com\.h2database/h2@2\.2\.224$</packageUrl>
     </suppress>
 </suppressions>
