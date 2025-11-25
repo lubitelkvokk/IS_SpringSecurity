@@ -43,6 +43,11 @@ jobs:
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
 
+      - name: Debug NVD API Key
+        run: echo "NVD_API_KEY=$NVD_API_KEY"
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+
       - name: Run OWASP Dependency-Check (SCA)
         run: |
           # Run dependency-check but do not fail the job based on CVSS to keep CI green.
