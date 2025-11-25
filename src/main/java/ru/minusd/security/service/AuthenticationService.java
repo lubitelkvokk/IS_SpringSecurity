@@ -10,6 +10,7 @@ import ru.minusd.security.domain.dto.SignInRequest;
 import ru.minusd.security.domain.dto.SignUpRequest;
 import ru.minusd.security.domain.model.Role;
 import ru.minusd.security.domain.model.User;
+import ru.minusd.security.util.HtmlEscapeUtils;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,13 @@ public class AuthenticationService {
      * @return токен
      */
     public JwtAuthenticationResponse signUp(SignUpRequest request) {
+        // Проверка на XSS атаки в username и email
+        if (HtmlEscapeUtils.containsXssPatterns(request.getUsername())) {
+            throw new RuntimeException("Имя пользователя содержит запрещённые символы");
+        }
+        if (HtmlEscapeUtils.containsXssPatterns(request.getEmail())) {
+            throw new RuntimeException("Email содержит запрещённые символы");
+        }
 
         var user = User.builder()
                 .username(request.getUsername())
@@ -47,6 +55,11 @@ public class AuthenticationService {
      * @return токен
      */
     public JwtAuthenticationResponse signIn(SignInRequest request) {
+        // Проверка на XSS атаки в username перед аутентификацией
+        if (HtmlEscapeUtils.containsXssPatterns(request.getUsername())) {
+            throw new RuntimeException("Имя пользователя содержит запрещённые символы");
+        }
+
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getUsername(),
                 request.getPassword()
