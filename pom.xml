@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.12</version>
+        <version>4.0.0</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.minusd</groupId>
@@ -18,7 +18,7 @@
         <java.version>17</java.version>
         <h2.version>2.3.230</h2.version>
 
-        <springdoc.version>2.5.0</springdoc.version>
+        <springdoc.version>3.0.0</springdoc.version>
         <logback.version>1.5.20</logback.version>
         <lombok.version>1.18.32</lombok.version>
         <jjwt.version>0.13.0</jjwt.version>
@@ -45,7 +45,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>6.1.16</version> <!-- обновлено -->
+                <version>7.0.1</version> <!-- обновлено -->
             </dependency>
 
             <!-- Spring Security -->
@@ -89,11 +89,11 @@
             </dependency>
 
             <!-- Angus -->
-            <dependency>
-                <groupId>org.eclipse.angus</groupId>
-                <artifactId>angus-activation</artifactId>
-                <version>2.0.3</version> <!-- обновлено -->
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.eclipse.angus</groupId>-->
+<!--                <artifactId>angus-activation</artifactId>-->
+<!--                <version>2.0.3</version> &lt;!&ndash; обновлено &ndash;&gt;-->
+<!--            </dependency>-->
 
             <!-- Lombok -->
             <dependency>
@@ -101,12 +101,19 @@
                 <artifactId>lombok</artifactId>
                 <version>1.18.42</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.20.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>4.0.0</version>
         </dependency>
 
         <dependency>
@@ -144,7 +151,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.6.0</version> <!-- обновлено -->
+            <version>3.0.0</version>
         </dependency>
 
         <dependency>
@@ -157,6 +164,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <version>4.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
