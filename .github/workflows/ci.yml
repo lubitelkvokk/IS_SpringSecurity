@@ -30,20 +30,25 @@ jobs:
         run: |
           java -version
           mvn -v || true
+      - name: Export NVD API Key
+        run: echo "NVD_API_KEY=${{ secrets.NVD_API_KEY }}" >> $GITHUB_ENV
 
       - name: Build (skip tests) using system Maven
         run: mvn -B -ntp -DskipTests package
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
 
       - name: Run SpotBugs (generate reports)
         run: mvn -ntp com.github.spotbugs:spotbugs-maven-plugin:4.9.8.0:spotbugs -DskipTests || true
-
-      - name: Run OWASP Dependency-Check (SCA)
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+
+      - name: Run OWASP Dependency-Check (SCA)
         run: |
           # Run dependency-check but do not fail the job based on CVSS to keep CI green.
           mvn -ntp org.owasp:dependency-check-maven:12.1.0:check -Dformat=ALL -DfailBuildOnCVSS=11 -Dnvd.apiKey=${{ secrets.NVD_API_KEY }} || true
-
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
       - name: Collect SpotBugs report
         if: always()
         uses: actions/upload-artifact@v4
@@ -54,6 +59,12 @@ jobs:
       - name: Collect Dependency-Check reports
         if: always()
         uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-reports
+          path: |
+            target/dependency-check-report.html
+            target/dependency-check-report.json
+            target/dependency-check-report.xml
         with:
           name: dependency-check-reports
           path: |
